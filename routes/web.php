@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\TEController;
 use App\Http\Controllers\TJController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,10 @@ Route::group([
     Route::get('toefl/japan/pelatihan_test', [TJController::class, 'pelatihan_test'])->name('japan.pelatihan_test');
 });
 
-Route::get('/', function () {
-    return view('layouts.admin.dashboard');
+Route::group([
+    // 'middleware' => 'user',
+    'as' => 'user.'
+], function(){
+    Route::get('dashboard', [DashboardController::class, 'dashboardUser'])->name('dashboard');
+    Route::get('toefl/pendaftaran', [PendaftaranController::class, 'index'])->name('index');
 });
