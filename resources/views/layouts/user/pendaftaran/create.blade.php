@@ -38,7 +38,7 @@
                 Formulir Pendaftaran
             </h3>
         </div>
-        <form action="#" method="#">
+        <form action="{{ route('user.store') }}" method="POST">
         @csrf
             <div class="card-body">
                 <h4>(<span class="text-danger">*</span>) Wajib di isi</h4>
@@ -79,7 +79,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Email <span class="text-danger">*</span></label>
-                            <input value="{{ old('email') }}" name="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Input Email Mahasiswa" autocomplete="off">
+                            <input value="{{ old('email') }}" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Input Email Mahasiswa" autocomplete="off">
                             @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -92,14 +92,14 @@
                             <label>Pilih Semester <span class="text-danger">*</span></label>
                             <select class="form-control @error('semester') is-invalid @enderror" name="semester">
                                 <option value="">--Pilih--</option>
-                                <option {{ old('semester') == "semester1" ? "selected" : "" }} value="semester1">Semester I (Satu)</option>
-                                <option {{ old('semester') == "semester2" ? "selected" : "" }} value="semester2">Semester II (Dua)</option>
-                                <option {{ old('semester') == "semester3" ? "selected" : "" }} value="semester3">Semester III (Tiga)</option>
-                                <option {{ old('semester') == "semester4" ? "selected" : "" }} value="semester4">Semester IV (Empat)</option>
-                                <option {{ old('semester') == "semester5" ? "selected" : "" }} value="semester5">Semester V (Lima)</option>
-                                <option {{ old('semester') == "semester6" ? "selected" : "" }} value="semester6">Semester VI (Enam)</option>
-                                <option {{ old('semester') == "semester7" ? "selected" : "" }} value="semester7">Semester VII (Tujuh)</option>
-                                <option {{ old('semester') == "semester8" ? "selected" : "" }} value="semester8">Semester VIII (Delapan)</option>
+                                <option {{ old('semester') == "semester 1" ? "selected" : "" }} value="semester 1">Semester I (Satu)</option>
+                                <option {{ old('semester') == "semester 2" ? "selected" : "" }} value="semester 2">Semester II (Dua)</option>
+                                <option {{ old('semester') == "semester 3" ? "selected" : "" }} value="semester 3">Semester III (Tiga)</option>
+                                <option {{ old('semester') == "semester 4" ? "selected" : "" }} value="semester 4">Semester IV (Empat)</option>
+                                <option {{ old('semester') == "semester 5" ? "selected" : "" }} value="semester 5">Semester V (Lima)</option>
+                                <option {{ old('semester') == "semester 6" ? "selected" : "" }} value="semester 6">Semester VI (Enam)</option>
+                                <option {{ old('semester') == "semester 7" ? "selected" : "" }} value="semester 7">Semester VII (Tujuh)</option>
+                                <option {{ old('semester') == "semester 8" ? "selected" : "" }} value="semester 8">Semester VIII (Delapan)</option>
                             </select>
                             @error('semester')
                                 <div class="invalid-feedback">
@@ -132,7 +132,7 @@
                                 <option value="">--Pilih--</option>
                                 <option {{ old('jenis') == "test" ? "selected" : "" }} value="test">Test</option>
                                 <option {{ old('jenis') == "pelatihan" ? "selected" : "" }} value="pelatihan">Pelatihan</option>
-                                <option {{ old('jenis') == "pelatihan_test" ? "selected" : "" }} value="pelatihan_test">Pelatihan dan Test</option>
+                                <option {{ old('jenis') == "pelatihan dan test" ? "selected" : "" }} value="pelatihan dan test">Pelatihan dan Test</option>
                             </select>
                             @error('jenis')
                                 <div class="invalid-feedback">

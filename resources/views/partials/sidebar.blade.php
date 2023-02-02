@@ -93,7 +93,7 @@
           {{-- Toefl Japan end --}}
 
           <li class="nav-item">
-            <a href="{{ route('user.index') }}" class="nav-link">
+            <a href="{{ route('user.create') }}" class="nav-link">
               <i class="nav-icon fas fa-pen"></i>
               <p>
                 Daftar TOEFL
