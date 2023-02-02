@@ -36,6 +36,7 @@ class PendaftaranController extends Controller
             'semester' => $request->semester,
             'bahasa' => $request->bahasa,
             'jenis' => $request->jenis,
+            'status_pembayaran' => 'belum dibayar',
         ]);
 
         return redirect()->route('user.invoice', $request->nim)->with('status','Pendaftaran Selesai, Lanjutkan pembayaran menggunakan Nomor Virtual');
