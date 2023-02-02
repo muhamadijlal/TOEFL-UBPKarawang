@@ -11,8 +11,9 @@ class PendaftaranController extends Controller
         return view('layouts.user.pendaftaran.create');
     }
 
-    public function invoice(){
-        return view('layouts.user.pendaftaran.invoice');
+    public function invoice($nim){
+        $data = Pendaftaran::where('nim', $nim)->first();
+        return view('layouts.user.pendaftaran.invoice', compact('data'));
     }
 
     public function store(Request $request){
@@ -37,6 +38,6 @@ class PendaftaranController extends Controller
             'jenis' => $request->jenis,
         ]);
 
-        return redirect()->route('user.invoice')->with('status','Pendaftaran Selesai, Lanjutkan pembayaran menggunakan Nomor Virtual');
+        return redirect()->route('user.invoice', $request->nim)->with('status','Pendaftaran Selesai, Lanjutkan pembayaran menggunakan Nomor Virtual');
     }
 }

@@ -35,7 +35,7 @@
                     <div class="col-12">
                         <h4>
                             <img src="{{ asset('assets/dist/img/logo-ubp.png') }}" width="50" alt="logo-ubp"> TOEFL UBP Karawang
-                            <small class="float-right">Date: Tanggal dibuat</small>
+                            <small class="float-right">Date: {{ $data->created_at->format('d/m/Y') }}</small>
                         </h4>
                     </div>
                 </div>
@@ -55,16 +55,15 @@
                     <div class="col-sm-4 invoice-col">
                         To
                         <address>
-                            <strong>Nama Mahasiswa</strong><br>
-                            NIM<br>
-                            Phone: (555) 539-1037<br>
-                            Email: john.doe@example.com
+                            <strong>{{ strtoupper($data->nama) }}</strong><br>
+                            {{ $data->nim }}<br>
+                            Telepon: {{ $data->telepon }}<br>
+                            Email: {{ $data->email }}
                         </address>
                     </div>
                     <div class="col-sm-4 invoice-col">
-                        <b>Invoice #0202202301</b><br>
+                        <b>Invoice #{{ Carbon\Carbon::now()->format('dmY') }}{{$data->id}}</b><br>
                         <br>
-                        <b>Order ID:</b> 4F3S8J<br>
                         <b>Tempo Pembayaran:</b> 2/22/2014<br>
                         <b>Virtual Account:</b> 968-34567
                     </div>
@@ -83,11 +82,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Call of Duty</td>
-                                    <td>455-981-221</td>
-                                    <td>El snort testosterone trophy driving gloves handsome</td>
-                                    <td>$64.50</td>
+                                    <td>{{ strtoupper($data->nama) }}</td>
+                                    <td>{{ $data->nim }}</td>
+                                    <td>{{ ucwords($data->bahasa) }}</td>
+                                    <td>{{ ucwords($data->jenis) }}</td>
+                                    <td>$20</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -97,10 +96,11 @@
                 <div class="row">
                     <div class="col-6">
                         <p class="lead">Payment Methods:</p>
-                        <img src="{{ asset('assets/dist/img/credit/visa.png') }}" alt="Visa">
+                        {{-- <img src="{{ asset('assets/dist/img/credit/visa.png') }}" alt="Visa">
                         <img src="{{ asset('assets/dist/img/credit/mastercard.png') }}" alt="Mastercard">
-                        <img src="{{ asset('assets/dist/img/credit/american-express.png') }}" alt="American Express">
-                        <img src="{{ asset('assets/dist/img/credit/paypal2.png') }}" alt="Paypal">
+                        <img src="{{ asset('assets/dist/img/credit/american-express.png') }}" alt="American Express"> --}}
+                        {{-- <img src="{{ asset('assets/dist/img/credit/paypal2.png') }}" alt="Paypal"> --}}
+                        <img src="{{ asset('assets/dist/img/logo-bni.jpg') }}" alt="BNI" height="50px;">
                         {{-- <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                         Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
                         plugg
@@ -126,15 +126,9 @@
                     </div>
                 </div>
         
-                <div class="row no-print">
+                <div class="row">
                     <div class="col-12">
-                        <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                        <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                            Payment
-                        </button>
-                        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                            <i class="fas fa-download"></i> Generate PDF
-                        </button>
+                        <button type="button" onclick="window.print();return false;" class="btn btn-default float-right"><i class="fas fa-print"></i> Print</button>
                     </div>
                 </div>
             </div>

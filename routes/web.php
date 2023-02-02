@@ -42,5 +42,5 @@ Route::group([
     Route::get('dashboard', [DashboardController::class, 'dashboardUser'])->name('dashboard');
     Route::get('toefl/pendaftaran', [PendaftaranController::class, 'create'])->name('create');
     Route::post('toefl/pendaftaran/store', [PendaftaranController::class, 'store'])->name('store');
-    Route::get('toefl/invoice', [PendaftaranController::class, 'invoice'])->name('invoice');
+    Route::get('toefl/invoice/{nim}', [PendaftaranController::class, 'invoice'])->name('invoice');
 });
