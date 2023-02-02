@@ -9,4 +9,8 @@ class PendaftaranController extends Controller
     public function index(){
         return view('layouts.user.pendaftaran.index');
     }
+
+    public function invoice(){
+        return view('layouts.user.pendaftaran.invoice');
+    }
 }

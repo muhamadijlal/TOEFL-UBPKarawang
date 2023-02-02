@@ -41,4 +41,5 @@ Route::group([
 ], function(){
     Route::get('dashboard', [DashboardController::class, 'dashboardUser'])->name('dashboard');
     Route::get('toefl/pendaftaran', [PendaftaranController::class, 'index'])->name('index');
+    Route::get('toefl/invoice', [PendaftaranController::class, 'invoice'])->name('invoice');
 });

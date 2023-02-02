@@ -47,10 +47,6 @@
     </section>
   </div>
   @include('partials.footer')
-
-
-  <aside class="control-sidebar control-sidebar-dark">
-  </aside>
 </div>
 
 <!-- jQuery -->

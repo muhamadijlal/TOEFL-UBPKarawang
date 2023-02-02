@@ -42,22 +42,22 @@
         @csrf
             <div class="card-body">
                 <h4>(<span class="text-danger">*</span>) Wajib di isi</h4>
-                <div class="row mt-4">
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Nama <span class="text-danger">*</span></label>
-                            <input value="{{ old('nama') }}" name="nama" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Input Nama Mahasiswa">
+                            <input value="{{ old('nama') }}" name="nama" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Input Nama Mahasiswa" autocomplete="off">
                             @error('nama')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>NIM <span class="text-danger">*</span></label>
-                            <input value="{{ old('nim') }}" name="nim" type="text" class="form-control @error('nim') is-invalid @enderror" placeholder="Input NIM Mahasiswa">
+                            <input value="{{ old('nim') }}" name="nim" type="text" class="form-control @error('nim') is-invalid @enderror" placeholder="Input NIM Mahasiswa" autocomplete="off">
                             @error('nim')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group">
                     <label>Nomor Telepon <span class="text-danger">*</span></label>
-                    <input value="{{ old('telepon') }}" name="telepon" type="text" class="form-control @error('telepon') is-invalid @enderror" placeholder="08**********">
+                    <input value="{{ old('telepon') }}" name="telepon" type="text" class="form-control @error('telepon') is-invalid @enderror" placeholder="08**********" autocomplete="off">
                     @error('telepon')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -79,7 +79,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Email <span class="text-danger">*</span></label>
-                            <input value="{{ old('email') }}" name="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Input Email Mahasiswa">
+                            <input value="{{ old('email') }}" name="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Input Email Mahasiswa" autocomplete="off">
                             @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -119,9 +119,9 @@
                                 <option {{ old('bahasa') == "jepang" ? "selected" : "" }} value="jepang">Jepang</option>
                             </select>
                             @error('bahasa')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
                     </div>
