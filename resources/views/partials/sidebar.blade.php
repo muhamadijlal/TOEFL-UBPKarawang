@@ -12,13 +12,14 @@
           <img src="{{ asset('assets/dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="#" class="d-block">{{ ucwords(Auth::user()->name) }}</a>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          @if(Auth::user()->role == 0)
           <li class="nav-item">
             <a href="{{ route('admin.dashboard') }}" class="nav-link">
               <i class="nav-icon fas fa-pen"></i>
@@ -91,7 +92,16 @@
             </ul>
           </li>
           {{-- Toefl Japan end --}}
-
+          @endif
+          @if(Auth::user()->role == 1)
+          <li class="nav-item">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link">
+              <i class="nav-icon fas fa-pen"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{ route('user.create') }}" class="nav-link">
               <i class="nav-icon fas fa-pen"></i>
@@ -100,6 +110,7 @@
               </p>
             </a>
           </li>
+          @endif
         </ul>
       </nav>
     </div>

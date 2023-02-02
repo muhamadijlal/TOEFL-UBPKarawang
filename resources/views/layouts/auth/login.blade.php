@@ -19,14 +19,23 @@
   <div class="login-logo">
     <a href="#"><b>TOEFL</b>UBP Karawang</a>
   </div>
-  <!-- /.login-logo -->
+  <div class="callout callout-info">
+    <h5><i class="fas fa-info-circle text-info"></i> Informasi</h5>
+    <p>Login menggunakan akun SIPT</p>
+  </div>
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Log in untuk memulai sesi</p>
-
-      <form action="#" method="#">
+      <h2 class="login-box-msg">Log in</h2>
+      @if(session('errors'))
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h5><i class="icon fas fa-ban"></i> Login gagal!</h5>
+      </div>
+      @endif
+      <form action="{{ route('autentication') }}" method="POST">
+        @csrf
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" name="email" autocomplete="off">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -34,7 +43,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="password" autocomplete="off">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -44,7 +53,7 @@
         <div class="row justify-content-end mt-5">
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
           </div>
           <!-- /.col -->
         </div>

@@ -38,8 +38,9 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <form action="" method="">
-        <button class="btn">
+      <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button class="btn" type="submit">
           <i class="fas fa-sign-out-alt"></i>
         </button>
       </form>
