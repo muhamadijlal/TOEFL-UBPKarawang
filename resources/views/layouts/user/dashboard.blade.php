@@ -25,37 +25,38 @@
 
 @section('content')
 <div class="container-fluid">
-  <div class="callout callout-success">
-    <h4><i class="fas fa-check-circle text-success"></i> Sukses!</h4>
-    <p>This is a yellow callout.</p>
+  @if(Auth::user()->nim == null && Auth::user()->phone == null)
+  <div class="callout callout-warning">
+    <h4>
+      <i class="fas fa-exclamation-triangle text-warning"></i> 
+      Peringatan!
+    </h4>
+    <p>Lengkapi dulu profil! <a href="#">Klik disini!</a></p>
   </div>
+  @endif
   <div class="card">
     <div class="card-body">
       <table class="table table-bordered table-stripped"  id="myTable" width="100%">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Nama</th>
-                <th>NIM</th>
-                <th>Email</th>
-                <th>Bahasa TOEFL</th>
-                <th>Jenis TOEFL</th>
-                <th>Nomor Telepon</th>
-                <th>Status Pembayaran</th>
-                <th>Aksi</th>
+              <th>Nama</th>
+              <th>NIM</th>
+              <th>Email</th>
+              <th>Bahasa TOEFL</th>
+              <th>Jenis TOEFL</th>
+              <th>Nomor Telepon</th>
+              <th>Status Pembayaran</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
+                <td>Muhamad Haidar Ijlal</td>
+                <td>18416255201201</td>
+                <td>if18.muhamadijlal@mhs.ubpkarawang.ac.id</td>
+                <td>Inggris</td>
+                <td>Test & Pelatihan</td>
+                <td>085156203033</td>
+                <td>Belum Lunas</td>
             </tr>
         </tbody>
       </table>
@@ -65,14 +66,14 @@
 @endsection
 
 @push('js')
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script>
-    $(document).ready( function () {
-        $('#myTable').DataTable();
-    });
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+  });
 </script>
 @endpush

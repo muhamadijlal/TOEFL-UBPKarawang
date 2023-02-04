@@ -19,10 +19,10 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          @if(Auth::user()->role == 0)
+          @if(Auth::user()->role == 'admin')
           <li class="nav-item">
             <a href="{{ route('admin.dashboard') }}" class="nav-link">
-              <i class="nav-icon fas fa-pen"></i>
+              <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
               </p>
@@ -93,10 +93,10 @@
           </li>
           {{-- Toefl Japan end --}}
           @endif
-          @if(Auth::user()->role == 1)
+          @if(Auth::user()->role == 'mahasiswa')
           <li class="nav-item">
             <a href="{{ route('admin.dashboard') }}" class="nav-link">
-              <i class="nav-icon fas fa-pen"></i>
+              <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
               </p>

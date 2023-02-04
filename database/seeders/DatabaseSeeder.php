@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
                 'nim' => '18416255201201',
                 'phone' => '085154324133',
                 'password' => Hash::make('12345'),
-                'role' => 1
+                'role' => 'mahasiswa'
             ],
             [
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('12345'),
-                'role' => 0
+                'role' => 'admin'
             ]
         ];
 

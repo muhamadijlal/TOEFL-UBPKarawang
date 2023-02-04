@@ -17,7 +17,7 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role == 1){
+        if(Auth::user()->role == 'mahasiswa'){
             return $next($request);
         }else{
             abort(403);
