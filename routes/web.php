@@ -5,6 +5,8 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\TEController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TJController;
+use App\Mail\registeredMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
