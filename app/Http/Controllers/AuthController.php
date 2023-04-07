@@ -41,23 +41,28 @@ class AuthController extends Controller
                     'password' => $request->password,
                 ]);               
         
+
             $data = json_decode($response->body());
-            $user = $data->data;
 
-            if($data->status_code == '000'){
-                User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'role' => $user->status,
-                    'password' => Hash::make($request->password),
-                ]);
+            if(isset($data->status_code) && $data->status_code = '000'){
+                if(isset($data->success)){
+                    $user = $data->data;
+                    User::create([
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'role' => $user->status,
+                        'password' => Hash::make($request->password),
+                    ]);
 
-                if(Auth::attempt($credentials)){
-                    if(Auth::user()->role == 'mahasiswa'){
-                        $request->session()->regenerate();
-                        return redirect()->intended(route('user.dashboard'));
-                    }
-                };
+                    if(Auth::attempt($credentials)){
+                        if(Auth::user()->role == 'mahasiswa'){
+                            $request->session()->regenerate();
+                            return redirect()->intended(route('user.dashboard'));
+                        }
+                    };
+                }else{
+                    return back()->withErrors($data->messages);
+                }
             }
             else
             {

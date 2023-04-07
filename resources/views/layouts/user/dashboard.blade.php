@@ -5,34 +5,23 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css"/>
 @endpush
 
-@section('breadcrumbs')
+@section('title')
 <div class="content-header">
     <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0">Dashboard</h1>
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+            </div>
         </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
-          </ol>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 @endsection
+
 
 @section('content')
 <div class="container-fluid">
-  @if(Auth::user()->nim == null && Auth::user()->phone == null)
-  <div class="callout callout-warning">
-    <h4>
-      <i class="fas fa-exclamation-triangle text-warning"></i> 
-      Peringatan!
-    </h4>
-    <p>Lengkapi dulu profil! <a href="#">Klik disini!</a></p>
-  </div>
+  @if(session('success'))
+    @include('components.alert-success', ['message' => session('success')])
   @endif
   <div class="card">
     <div class="card-body">
@@ -42,23 +31,14 @@
               <th>Nama</th>
               <th>NIM</th>
               <th>Email</th>
+              <th>Semester</th>
               <th>Bahasa TOEFL</th>
               <th>Jenis TOEFL</th>
-              <th>Nomor Telepon</th>
               <th>Status Pembayaran</th>
+              <th>Invoice</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Muhamad Haidar Ijlal</td>
-                <td>18416255201201</td>
-                <td>if18.muhamadijlal@mhs.ubpkarawang.ac.id</td>
-                <td>Inggris</td>
-                <td>Test & Pelatihan</td>
-                <td>085156203033</td>
-                <td>Belum Lunas</td>
-            </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
   </div>
@@ -73,7 +53,30 @@
   <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script>
   $(document).ready( function () {
-    $('#myTable').DataTable();
+    const url = '/dashboard/datatable';
+
+    $('#myTable').DataTable({
+      processing: true,
+      serverSide: true,
+      responsive: true,
+      ajax: {
+        url: url,
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      },
+      columns: [
+        {data: 'nama', name: 'nama'},
+        {data: 'nim', name: 'nim'},
+        {data: 'email', name: 'email'},
+        {data: 'semester', name: 'semester'},
+        {data: 'bahasa', name: 'bahasa'},
+        {data: 'jenis', name: 'jenis'},
+        {data: 'status_pembayaran', name: 'status_pembayaran'},
+        {data: 'invoice', name: 'invoice'},
+      ]
+    });
   });
 </script>
 @endpush

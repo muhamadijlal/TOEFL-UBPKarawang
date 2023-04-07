@@ -11,4 +11,20 @@ class Pendaftaran extends Model
 
     protected $table = 'pendaftaran';
     protected $guarded = ['id'];
+
+    // Each pendaftaran owned belongsTo user
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Each pendaftaran owned belongsTo user
+    public function invoice(){
+        return $this->hasOne(Invoice::class, 'id');
+    }
+
+    // Pendaftaran belongsTo product
+    public function product()
+    {
+        return $this->belongsTo(Product::class,'product_id');
+    }
 }

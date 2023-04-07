@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>TOEFL | UBP Karawang</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -41,7 +42,7 @@
   @include('partials.sidebar')
 
   <div class="content-wrapper">
-    @yield('breadcrumbs')
+    @yield('title')
     <section class="content">
       @yield('content')
     </section>

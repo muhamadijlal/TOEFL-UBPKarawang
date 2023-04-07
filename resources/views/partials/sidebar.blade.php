@@ -95,7 +95,7 @@
           @endif
           @if(Auth::user()->role == 'mahasiswa')
           <li class="nav-item">
-            <a href="{{ route('admin.dashboard') }}" class="nav-link">
+            <a href="{{ route('user.dashboard') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
