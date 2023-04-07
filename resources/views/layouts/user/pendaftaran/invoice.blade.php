@@ -43,7 +43,6 @@
                             Puseurjaya, Telukjambe Timur, Karawang<br>
                             Jawa Barat, 41361<br>
                             Phone: (0267) 8403140<br>
-                            Email: ubpkarawang.ac.id
                         </address>
                     </div>
         
@@ -56,7 +55,7 @@
                         </address>
                     </div>
                     <div class="col-sm-4 invoice-col">
-                        <b>Invoice {{ $data->invoice->nomor_invoice }}</b><br>
+                        <b>Invoice #{{ $data->invoice->nomor_invoice }}</b><br>
                         <br>
                         <b>Tempo Pembayaran:</b> null<br>
                         <b>Virtual Account:</b> {{ $data->VA }}
