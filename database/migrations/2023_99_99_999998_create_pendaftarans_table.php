@@ -17,16 +17,17 @@ class CreatePendaftaransTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
-            $table->enum('semester',['semester 1','semester 2','semester 3','semester 4','semester 5','semester 6','semester 7','semester 8',]);
-            $table->string('VA')->unique();
-            $table->string('subtotal');
-            $table->enum('status_pembayaran',['lunas','belum dibayar']);
+            $table->unsignedBigInteger('periode_id');
+            $table->string('virtual_account', 10)->unique();
+            $table->float('subtotal');
+            $table->boolean('status_pembayaran');
             $table->timestamps();
         });
 
         Schema::table('pendaftaran', function(Blueprint $table){
             $table->foreign('product_id')->on('product')->references('id')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('user_id')->on('user')->references('id')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('periode_id')->on('periode')->references('id')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 

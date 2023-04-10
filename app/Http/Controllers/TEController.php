@@ -12,11 +12,14 @@ class TEController extends Controller
     }
 
     public function datatablePelatihan(){
-        $collection = Pendaftaran::with(['user'])
-                                    ->where('bahasa','inggris')
-                                    ->where('jenis','pelatihan')
+        $collection = Pendaftaran::with(['user','product' => function($query){
+                                        $query->where('bahasa','inggris')
+                                            ->where('jenis','pelatihan')
+                                            ->get();
+                                    }])
                                     ->orderBy('id','DESC')
                                     ->get();
+
         return datatables()
                 ->of($collection)
                 ->addIndexColumn()

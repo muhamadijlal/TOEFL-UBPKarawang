@@ -20,12 +20,10 @@ class User extends Authenticatable
     protected $table = 'user';
     
     protected $fillable = [
-        'name',
-        'nim',
+        'nama',
         'email',
-        'phone',
-        'password',
         'role',
+        'password',
     ];
 
     /**
@@ -55,5 +53,10 @@ class User extends Authenticatable
     // each user have many invoice
     public function invoice(){
         return $this->hasMany(Invoice::class, 'id');
+    }
+
+    // Each user has One user profile
+    public function profile(){
+        return $this->hasOne(ProfileUser::class, 'id');
     }
 }

@@ -13,7 +13,7 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('invoice', function (Blueprint $table) {
             $table->id();
             $table->string("nomor_invoice", 25)->unique();
             $table->unsignedBigInteger('user_id');
@@ -21,7 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('invoices', function (Blueprint $table) {
+        Schema::table('invoice', function (Blueprint $table) {
             $table->foreign("user_id")->on("user")->references("id")->onDelete('restrict')->onUpdate("cascade");
             $table->foreign("pendaftaran_id")->on("pendaftaran")->references("id")->onDelete('restrict')->onUpdate("cascade");
         });
@@ -34,6 +34,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('invoice');
     }
 }

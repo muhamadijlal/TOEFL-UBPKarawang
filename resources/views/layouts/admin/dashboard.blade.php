@@ -22,7 +22,7 @@
       <div class="col-6">
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>{{ $total_inggris }}</h3>
+            <h3>0</h3>
             <p>Total pendaftaran Toefl Inggris</p>
           </div>
         </div>
@@ -30,7 +30,7 @@
       <div class="col-6">
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>{{ $total_jepang }}</h3>
+            <h3>0</h3>
             <p>Total pendaftaran Toefl Jepang</p>
           </div>
         </div>

@@ -35,11 +35,11 @@ class AuthController extends Controller
             $response = Http::withHeaders([
                 'Authorization' => 'd780SjadaKsWasREvWwa',
                 'Content-Type' => 'application/json'
-                ])
-                ->post('https://api-gateway.ubpkarawang.ac.id/external/vaksin/get-user', [
-                    'email' => $request->email,
-                    'password' => $request->password,
-                ]);               
+            ])
+            ->post('https://api-gateway.ubpkarawang.ac.id/external/vaksin/get-user', [
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
         
 
             $data = json_decode($response->body());
@@ -50,6 +50,7 @@ class AuthController extends Controller
                     User::create([
                         'name' => $user->name,
                         'email' => $user->email,
+                        'nim' => $user->nim,
                         'role' => $user->status,
                         'password' => Hash::make($request->password),
                     ]);

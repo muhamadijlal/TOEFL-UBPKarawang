@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'user',
                 'email' => 'user@gmail.com',
-                'nim' => '18416255201201',
+                'nim' => '111111111111111',
                 'password' => Hash::make('12345'),
                 'role' => 'mahasiswa'
             ],

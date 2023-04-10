@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function dashboardAdmin(){
-        $total_inggris = Pendaftaran::where('bahasa','inggris')->count();
-        $total_jepang = Pendaftaran::where('bahasa','jepang')->count();
+
+        $total_inggris = Pendaftaran::get();
+        $total_jepang = Pendaftaran::get();
         return view('layouts.admin.dashboard', compact('total_inggris','total_jepang'));
     }
 

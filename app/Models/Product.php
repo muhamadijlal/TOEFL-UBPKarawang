@@ -10,7 +10,11 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'product';
-    protected $fillable = ['bahasa','jenis','harga'];
+    protected $fillable = [
+        'bahasa',
+        'jenis',
+        'harga'
+    ];
 
     // product has many pendaftaran
     public function pendaftaran()
