@@ -29,6 +29,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{ route('admin.periode') }}" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Master periode
+              </p>
+            </a>
+          </li>
+
           {{-- Toefl English start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -93,6 +102,7 @@
           </li>
           {{-- Toefl Japan end --}}
           @endif
+
           @if(Auth::user()->role == 'mahasiswa')
           <li class="nav-item">
             <a href="{{ route('user.dashboard') }}" class="nav-link">

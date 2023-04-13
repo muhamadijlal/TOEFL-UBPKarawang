@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
+  {{-- Sweet alert --}}
+  <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
   {{-- MyCss --}}
   @stack('css')
 </head>
@@ -80,6 +82,8 @@
 <script src="{{ asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
+{{-- Sweet alert --}}
+<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 {{-- MyJS --}}
 @stack('js')
 <!-- AdminLTE for demo purposes -->

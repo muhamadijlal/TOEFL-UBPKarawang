@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\TEController;
 use App\Http\Controllers\AuthController;
@@ -28,6 +29,11 @@ Route::group(['middleware'=>['auth','revalidate']], function(){
         'as' => 'admin.'
     ], function(){
         Route::get('dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboard');
+
+        // Master periode
+        Route::get('periode', [PeriodeController::class, 'index'])->name('periode');
+        Route::post('periode/datatable', [PeriodeController::class, 'datatable'])->name('periode.datatable');
+        Route::post('periode/store', [PeriodeController::class, 'store'])->name('periode.store');
 
         // English
         Route::get('toefl/english/pelatihan', [TEController::class, 'pelatihan'])->name('english.pelatihan');
