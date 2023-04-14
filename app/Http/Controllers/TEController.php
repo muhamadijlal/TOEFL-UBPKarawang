@@ -34,9 +34,6 @@ class TEController extends Controller
                 ->addColumn('email', function($row){
                     return $row->user->email;
                 })
-                ->addColumn('aksi', function($row){
-                    return '';
-                })
                 ->addColumn('status_pembayaran', function($row){
                     if($row->status_pembayaran == 1){
                         return '
@@ -47,6 +44,11 @@ class TEController extends Controller
                             <span class="badge badge-secondary">Belum Lunas</span>
                         ';
                     }
+                })
+                ->addColumn('aksi', function($row){
+                    return '
+                        <button type="button" class="btn btn-block btn-info">Send Notif</button>
+                    ';
                 })
                 ->rawColumns(['aksi','status_pembayaran'])
                 ->make(true);
@@ -89,7 +91,9 @@ class TEController extends Controller
                     }
                 })
                 ->addColumn('aksi', function($row){
-                    return '';
+                    return '
+                        <button type="button" class="btn btn-block btn-info">Send Notif</button>
+                    ';
                 })
                 ->rawColumns(['aksi','status_pembayaran'])
                 ->make(true);
@@ -132,7 +136,9 @@ class TEController extends Controller
                     }
                 })
                 ->addColumn('aksi', function($row){
-                    return '';
+                    return '
+                        <button type="button" class="btn btn-block btn-info">Send Notif</button>
+                    ';
                 })
                 ->rawColumns(['aksi','status_pembayaran'])
                 ->make(true);

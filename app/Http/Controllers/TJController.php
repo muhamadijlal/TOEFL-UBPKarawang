@@ -46,7 +46,9 @@ class TJController extends Controller
                 }
             })
             ->addColumn('aksi', function($row){
-                return '';
+                return '
+                    <button type="button" class="btn btn-block btn-info">Send Notif</button>
+                ';
             })
             ->rawColumns(['aksi','status_pembayaran'])
             ->make(true);
@@ -90,7 +92,9 @@ class TJController extends Controller
                    }
                })
                ->addColumn('aksi', function($row){
-                   return '';
+                   return '
+                        <button type="button" class="btn btn-block btn-info">Send Notif</button>
+                   ';
                })
                ->rawColumns(['aksi','status_pembayaran'])
                ->make(true);
@@ -134,7 +138,9 @@ class TJController extends Controller
                    }
                })
                ->addColumn('aksi', function($row){
-                   return '';
+                   return '
+                        <button type="button" class="btn btn-block btn-info">Send Notif</button>
+                   ';
                })
                ->rawColumns(['aksi','status_pembayaran'])
                ->make(true);
