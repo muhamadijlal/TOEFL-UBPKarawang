@@ -16,12 +16,12 @@ class UserSeeder extends Seeder
     public function run()
     {
         $users = [
-            [
-                'nama' => 'user',
-                'email' => 'user@gmail.com',
-                'role' => 'mahasiswa',
-                'password' => Hash::make('12345'),
-            ],
+            // [
+            //     'nama' => 'user',
+            //     'email' => 'user@gmail.com',
+            //     'role' => 'mahasiswa',
+            //     'password' => Hash::make('12345'),
+            // ],
             [
                 'nama' => 'admin',
                 'email' => 'admin@gmail.com',

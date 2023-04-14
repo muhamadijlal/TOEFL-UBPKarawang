@@ -49,13 +49,13 @@ Route::group(['middleware'=>['auth','revalidate']], function(){
         
         // Japan
         Route::get('toefl/japan/test', [TJController::class, 'test'])->name('japan.test');
-        Route::post('toefl/japan/test/datatable', [TEController::class, 'datatableTest']);
+        Route::post('toefl/japan/test/datatable', [TJController::class, 'datatableTest']);
 
         Route::get('toefl/japan/pelatihan', [TJController::class, 'pelatihan'])->name('japan.pelatihan');
-        Route::post('toefl/japan/pelatihan/datatable', [TEController::class, 'datatableTest']);
+        Route::post('toefl/japan/pelatihan/datatable', [TJController::class, 'datatableTest']);
 
         Route::get('toefl/japan/pelatihan_test', [TJController::class, 'pelatihan_test'])->name('japan.pelatihan_test');
-        Route::post('toefl/japan/pelatihan_test/datatable', [TEController::class, 'datatableTest']);
+        Route::post('toefl/japan/pelatihan_test/datatable', [TJController::class, 'datatableTest']);
     });
 
     Route::group([

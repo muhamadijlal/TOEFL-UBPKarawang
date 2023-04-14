@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pendaftaran;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class TEController extends Controller
@@ -12,22 +13,23 @@ class TEController extends Controller
     }
 
     public function datatablePelatihan(){
-        $collection = Pendaftaran::with(['user','product' => function($query){
-                                        $query->where('bahasa','inggris')
-                                            ->where('jenis','pelatihan')
-                                            ->get();
-                                    }])
-                                    ->orderBy('id','DESC')
-                                    ->get();
+        $product = Product::where('bahasa','inggris')
+                            ->where('jenis','pelatihan')
+                            ->first();
+
+        $collection = Pendaftaran::with(['user'])
+                                ->orderBy('id','DESC')
+                                ->where('product_id', $product->id)
+                                 ->get();
 
         return datatables()
                 ->of($collection)
                 ->addIndexColumn()
                 ->addColumn('nama', function($row){
-                    return $row->user->name;
+                    return $row->user->nama;
                 })
                 ->addColumn('nim', function($row){
-                    return $row->user->nim;
+                    return $row->user->profile->nim;
                 })
                 ->addColumn('email', function($row){
                     return $row->user->email;
@@ -35,7 +37,18 @@ class TEController extends Controller
                 ->addColumn('aksi', function($row){
                     return '';
                 })
-                ->rawColumns(['aksi'])
+                ->addColumn('status_pembayaran', function($row){
+                    if($row->status_pembayaran == 1){
+                        return '
+                            <span class="badge badge-success">Lunas</span>
+                        ';
+                    }else{
+                        return '
+                            <span class="badge badge-secondary">Belum Lunas</span>
+                        ';
+                    }
+                })
+                ->rawColumns(['aksi','status_pembayaran'])
                 ->make(true);
     }
 
@@ -44,27 +57,41 @@ class TEController extends Controller
     }
 
     public function datatableTest(){
+        $product = Product::where('bahasa','inggris')
+                            ->where('jenis','test')
+                            ->first();
+
         $collection = Pendaftaran::with(['user'])
-                                    ->where('bahasa','inggris')
-                                    ->where('jenis','test')
-                                    ->orderBy('id','DESC')
-                                    ->get();
+                                ->orderBy('id','DESC')
+                                ->where('product_id', $product->id)
+                                 ->get();
         return datatables()
                 ->of($collection)
                 ->addIndexColumn()
                 ->addColumn('nama', function($row){
-                    return $row->user->name;
+                    return $row->user->nama;
                 })
                 ->addColumn('nim', function($row){
-                    return $row->user->nim;
+                    return $row->user->profile->nim;
                 })
                 ->addColumn('email', function($row){
                     return $row->user->email;
                 })
+                ->addColumn('status_pembayaran', function($row){
+                    if($row->status_pembayaran == 1){
+                        return '
+                            <span class="badge badge-success">Lunas</span>
+                        ';
+                    }else{
+                        return '
+                            <span class="badge badge-secondary">Belum Lunas</span>
+                        ';
+                    }
+                })
                 ->addColumn('aksi', function($row){
                     return '';
                 })
-                ->rawColumns(['aksi'])
+                ->rawColumns(['aksi','status_pembayaran'])
                 ->make(true);
     }
     public function pelatihan_test(){
@@ -72,27 +99,42 @@ class TEController extends Controller
     }
 
     public function datatablePelatihanTest(){
+        $product = Product::where('bahasa','inggris')
+                          ->where('jenis','pelatihan dan test')
+                          ->first();
+
         $collection = Pendaftaran::with(['user'])
-                                    ->where('bahasa','inggris')
-                                    ->where('jenis','pelatihan dan test')
-                                    ->orderBy('id','DESC')
-                                    ->get();
+                                 ->orderBy('id','DESC')
+                                 ->where('product_id', $product->id)
+                                 ->get();
+
         return datatables()
                 ->of($collection)
                 ->addIndexColumn()
                 ->addColumn('nama', function($row){
-                    return $row->user->name;
+                    return $row->user->nama;
                 })
                 ->addColumn('nim', function($row){
-                    return $row->user->nim;
+                    return $row->user->profile->nim;
                 })
                 ->addColumn('email', function($row){
                     return $row->user->email;
                 })
+                ->addColumn('status_pembayaran', function($row){
+                    if($row->status_pembayaran == 1){
+                        return '
+                            <span class="badge badge-success">Lunas</span>
+                        ';
+                    }else{
+                        return '
+                            <span class="badge badge-secondary">Belum Lunas</span>
+                        ';
+                    }
+                })
                 ->addColumn('aksi', function($row){
                     return '';
                 })
-                ->rawColumns(['aksi'])
+                ->rawColumns(['aksi','status_pembayaran'])
                 ->make(true);
     }
 }

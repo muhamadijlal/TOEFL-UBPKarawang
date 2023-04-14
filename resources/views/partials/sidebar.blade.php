@@ -38,12 +38,12 @@
             </a>
           </li>
 
-          {{-- Toefl English start --}}
+          {{-- English start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                TOEFL English
+                English
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -68,14 +68,14 @@
               </li>
             </ul>
           </li>
-          {{-- Toefl English end --}}
+          {{-- English end --}}
 
-          {{-- Toefl Japan start --}}
+          {{-- Japan start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                TOEFL Jepang
+                Jepang
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
