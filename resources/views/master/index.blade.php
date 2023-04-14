@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
   {{-- Sweet alert --}}
   <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+  {{-- Swal custom css --}}
+  <link rel="stylesheet" href="{{ asset('assets/css/swal2.css') }}">
   {{-- MyCss --}}
   @stack('css')
 </head>

@@ -38,7 +38,7 @@ class PeriodeController extends Controller
                 })
                 ->addColumn('aksi', function($row){
                     return '
-                    <button type="submit" class="btn btn-danger btn-sm">
+                    <button onclick="confirmDelete('.$row->id.')" type="submit" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
                     </button>
                     ';
@@ -67,5 +67,12 @@ class PeriodeController extends Controller
         ]);
 
         return response()->json(['status_code' => 200, 'status_message' => 'success', 'message' => 'Periode berhasil ditambahkan']);
+    }
+
+    public function destroy($id)
+    {
+        Periode::findOrFail($id)->delete();
+     
+        return response()->json(['status_code' => 200, 'status_message' => 'success', 'message' => 'Periode berhasil dihapus']);
     }
 }

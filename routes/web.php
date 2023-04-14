@@ -34,6 +34,7 @@ Route::group(['middleware'=>['auth','revalidate']], function(){
         Route::get('periode', [PeriodeController::class, 'index'])->name('periode');
         Route::post('periode/datatable', [PeriodeController::class, 'datatable'])->name('periode.datatable');
         Route::post('periode/store', [PeriodeController::class, 'store'])->name('periode.store');
+        Route::delete('periode/destroy/{id}', [PeriodeController::class, 'destroy'])->name('periode.destroy');
 
         // English
         Route::get('toefl/english/pelatihan', [TEController::class, 'pelatihan'])->name('english.pelatihan');

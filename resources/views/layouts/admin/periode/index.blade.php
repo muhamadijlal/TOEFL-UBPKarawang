@@ -121,7 +121,6 @@
 
 
 // Store data nama periode dan date time picker
-
   // Sweet alert
   const Toast = Swal.mixin({
     toast: true,
@@ -171,5 +170,59 @@
       }
     });
   })
+
+  // Confirm delete function
+  function confirmDelete(id) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+      title: 'Anda yakin ?',
+      text: "Data akan dihapus!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Tidak, batalkan!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // if confirmed
+        $.ajax({
+          url: "/admin/periode/destroy/"+id,
+          type: 'DELETE',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function(response) {
+            if(response.status_code == 200){
+              swalWithBootstrapButtons.fire(
+                response.status_message,
+                response.message,
+                response.status_message
+              )
+            }else{
+              swalWithBootstrapButtons.fire(
+                response.status_message,
+                response.message,
+                response.status_message
+              )
+            }
+          table.draw()
+          }
+        });
+      }else{
+        // if canceled
+        swalWithBootstrapButtons.fire(
+          'Hapus dibatalkan',
+          'Data anda aman',
+          'info'
+        )
+      };
+    });
+  }
 </script>
 @endpush
