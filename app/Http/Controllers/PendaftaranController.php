@@ -16,11 +16,15 @@ class PendaftaranController extends Controller
 {
     public function __construct()
     {
-        public $client_id = 2108;
+        $client_id = 2108;
     }
 
-    public function create(){
+    public function pendaftaran(){
         $jenisTOEFL = Product::get();
+        if(Auth::user()->profile == null){
+            return redirect()->route('user.dashboard');
+        }
+
         return view('layouts.user.pendaftaran.create', compact('jenisTOEFL'));
     }
 
@@ -39,26 +43,7 @@ class PendaftaranController extends Controller
         $product = Product::where('id',$request->jenis)->first('harga');
         $subtotal = $product->harga;
         
-        $response = Http::withHeaders([
-            'Authorization' => 'ec7f27469786d4d06bdda37ebb20e435',
-            'Content-Type' => 'application/json'
-        ])
-        ->post('https://apibeta.bni-ecollection.com/', [
-            date_default_timezone_set('Asia/Jakarta');
-            $datetime_expired=date('c', time() + 12 * 3600);
-            $data_asli = array(
-                        'client_id' => $this->client_id,
-                        'trx_id' => mt_rand(), // fill with Billing ID
-                        'trx_amount' => $total_bayar, 
-                        'billing_type' => 'c',
-                        'datetime_expired' => $datetime_expired,
-                        'customer_name' => $customer_name,
-                        'customer_email' => $mhs_ukt->email,
-                        'customer_phone' => $mhs_ukt->handphone ,
-                        'description' => $customer_name,
-                        'type'=>'createBilling'
-                    );
-        ]);
+        // $this->apiBniResponse();
 
         $pendaftaran_id = Pendaftaran::create([
             'user_id' => Auth::user()->id,
@@ -79,5 +64,28 @@ class PendaftaranController extends Controller
             ->send(new registeredMail());
 
         return redirect()->route('user.dashboard')->with('success','Pendaftaran Selesai, Lanjutkan pembayaran menggunakan Nomor Virtual');
+    }
+
+    public function apiBniResponse($data){
+        // $response = Http::withHeaders([
+        //     'Authorization' => 'ec7f27469786d4d06bdda37ebb20e435',
+        //     'Content-Type' => 'application/json'
+        // ])
+        // ->post('https://apibeta.bni-ecollection.com/', [
+        //     date_default_timezone_set('Asia/Jakarta'),
+        //     $datetime_expired=date('c', time() + 12 * 3600),
+        //     $data_asli = array(
+        //                 'client_id' => $this->client_id,
+        //                 'trx_id' => mt_rand(), // fill with Billing ID
+        //                 'trx_amount' => $total_bayar, 
+        //                 'billing_type' => 'c',
+        //                 'datetime_expired' => $datetime_expired,
+        //                 'customer_name' => $customer_name,
+        //                 'customer_email' => $mhs_ukt->email,
+        //                 'customer_phone' => $mhs_ukt->handphone ,
+        //                 'description' => $customer_name,
+        //                 'type'=>'createBilling'
+        //             )
+        // ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProfileUser;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -47,12 +48,16 @@ class AuthController extends Controller
             if(isset($data->status_code) && $data->status_code = '000'){
                 if(isset($data->success)){
                     $user = $data->data;
-                    User::create([
-                        'name' => $user->name,
-                        'email' => $user->email,
+                    $userId = User::create([
+                                'nama' => $user->name,
+                                'email' => $user->email,
+                                'role' => $user->status,
+                                'password' => Hash::make($request->password),
+                            ])->id;
+
+                    ProfileUser::create([
+                        'user_id' => $userId,
                         'nim' => $user->nim,
-                        'role' => $user->status,
-                        'password' => Hash::make($request->password),
                     ]);
 
                     if(Auth::attempt($credentials)){

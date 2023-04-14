@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TEController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TJController;
@@ -61,9 +62,18 @@ Route::group(['middleware'=>['auth','revalidate']], function(){
         'middleware' => 'user',
         'as' => 'user.'
     ], function(){
+        // 
         Route::get('dashboard', [DashboardController::class, 'dashboardUser'])->name('dashboard');
+
+        // 
         Route::post('dashboard/datatable', [DashboardController::class, 'datatableUser']);
-        Route::get('toefl/pendaftaran', [PendaftaranController::class, 'create'])->name('create');
+
+        // Profile
+        Route::get('profile/{id}', [UserController::class, 'profile'])->name('profile');
+        Route::patch('profile/update/{id}', [UserController::class, 'update'])->name('profile.update');
+
+        // 
+        Route::get('toefl/pendaftaran', [PendaftaranController::class, 'pendaftaran'])->name('pendaftaran');
         Route::post('toefl/pendaftaran/store', [PendaftaranController::class, 'store'])->name('store');
         Route::get('toefl/invoice/{pendaftaran_id}', [PendaftaranController::class, 'invoice'])->name('invoice');
     });

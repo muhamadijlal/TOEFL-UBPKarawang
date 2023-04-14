@@ -13,17 +13,17 @@ class CreateProfileUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_user', function (Blueprint $table) {
+        Schema::create('profile', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('nim', 15);
-            $table->string('no_handphone', 15);
-            $table->string('semester', 12);
-            $table->string('program_studi', 25);
+            $table->string('no_handphone', 15)->nullable();
+            $table->string('semester', 12)->nullable();
+            $table->string('program_studi', 25)->nullable();
             $table->timestamps();
         });
 
-        Schema::table('profile_user', function (Blueprint $table) {
+        Schema::table('profile', function (Blueprint $table) {
             $table->foreign('user_id')->on('user')->references('id')->onUpdate('cascade')->onDelete('restrict');
         });
     }

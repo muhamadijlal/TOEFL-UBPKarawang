@@ -12,7 +12,7 @@
           <img src="{{ asset('assets/dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ ucwords(Auth::user()->name) }}</a>
+          <a href="{{ Auth::user()->role == 'mahasiswa' ? route('user.profile', Auth::user()->id) : '#' }}" class="d-block">{{ ucwords(Auth::user()->nama) }}</a>
         </div>
       </div>
 
@@ -113,7 +113,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('user.create') }}" class="nav-link">
+            <a href="{{ route('user.pendaftaran') }}" class="nav-link">
               <i class="nav-icon fas fa-pen"></i>
               <p>
                 Daftar TOEFL

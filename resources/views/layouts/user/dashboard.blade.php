@@ -23,6 +23,14 @@
   @if(session('success'))
     @include('components.alert-success', ['message' => session('success')])
   @endif
+
+  @if(Auth::user()->profile->no_handphone == null || Auth::user()->profile->semester == null || Auth::user()->profile->program_studi == null)
+  <div class="callout callout-warning">
+    <h4><i class="fas fa-exclamation-triangle text-warning"></i> Peringatan!</h4>
+    <p>lengkapi profile terlebih dahulu sebelum mendaftar TOEFL, atau <a href="{{ route('user.profile', Auth::user()->id) }}">Klik disini!</a></p>
+  </div>
+  @endif
+
   <div class="card">
     <div class="card-body">
       <table class="table table-bordered table-stripped"  id="myTable" width="100%">
