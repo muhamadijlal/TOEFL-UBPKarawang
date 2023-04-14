@@ -36,9 +36,9 @@
         
                 <div class="row invoice-info mt-4">
                     <div class="col-sm-4 invoice-col">
-                        From
+                        Dari
                         <address>
-                            <strong>UBP Karawang</strong><br>
+                            <strong>Universitas Buana Perjuangan Karawang</strong><br>
                             Jl. HS.Ronggo Waluyo<br>
                             Puseurjaya, Telukjambe Timur, Karawang<br>
                             Jawa Barat, 41361<br>
@@ -47,18 +47,19 @@
                     </div>
         
                     <div class="col-sm-4 invoice-col">
-                        To
+                        Kepada
                         <address>
-                            <strong>{{ strtoupper($data->user->name) }}</strong><br>
-                            {{ $data->user->nim }}<br>
+                            <strong>{{ strtoupper($data->user->nama) }}</strong><br>
+                            {{ $data->user->profile->nim }}<br>
                             Email: {{ $data->user->email }}
                         </address>
                     </div>
                     <div class="col-sm-4 invoice-col">
                         <b>Invoice #{{ $data->invoice->nomor_invoice }}</b><br>
                         <br>
-                        <b>Tempo Pembayaran:</b> null<br>
-                        <b>Virtual Account:</b> {{ $data->VA }}
+                        <b>Tempo Pembayaran :</b> null<br>
+                        <b>Virtual Account :</b> {{ $data->virtual_account }}<br>
+                        <b>Periode :</b> {{ $data->periode->nama_periode }}
                     </div>
                 </div>
                 <div class="row">
@@ -75,8 +76,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ strtoupper($data->user->name) }}</td>
-                                    <td>{{ $data->user->nim }}</td>
+                                    <td>{{ strtoupper($data->user->nama) }}</td>
+                                    <td>{{ $data->user->profile->nim }}</td>
                                     <td>{{ ucwords($data->product->bahasa) }}</td>
                                     <td>{{ ucwords($data->product->jenis) }}</td>
                                     <td>@currency(intval($data->subtotal))</td>

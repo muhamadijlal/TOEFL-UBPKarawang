@@ -30,19 +30,56 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label>Pilih Semester <span class="text-danger">*</span></label>
-                            <select class="form-control @error('semester') is-invalid @enderror" name="semester">
-                                <option value="" disabled selected>--Pilih--</option>
-                                <option {{ old('semester') == "semester 1" ? "selected" : "" }} value="semester 1">Semester I (Satu)</option>
-                                <option {{ old('semester') == "semester 2" ? "selected" : "" }} value="semester 2">Semester II (Dua)</option>
-                                <option {{ old('semester') == "semester 3" ? "selected" : "" }} value="semester 3">Semester III (Tiga)</option>
-                                <option {{ old('semester') == "semester 4" ? "selected" : "" }} value="semester 4">Semester IV (Empat)</option>
-                                <option {{ old('semester') == "semester 5" ? "selected" : "" }} value="semester 5">Semester V (Lima)</option>
-                                <option {{ old('semester') == "semester 6" ? "selected" : "" }} value="semester 6">Semester VI (Enam)</option>
-                                <option {{ old('semester') == "semester 7" ? "selected" : "" }} value="semester 7">Semester VII (Tujuh)</option>
-                                <option {{ old('semester') == "semester 8" ? "selected" : "" }} value="semester 8">Semester VIII (Delapan)</option>
+                            <label>Nama</label>
+                            <input type="text" class="form-control" readonly value="{{ ucwords(Auth::user()->nama) }}">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>NIM</label>
+                            <input type="text" class="form-control" readonly value="{{ ucwords(Auth::user()->profile->nim) }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Nomor Handphone</label>
+                            <input type="text" class="form-control" readonly value="{{ ucwords(Auth::user()->profile->no_handphone) }}">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" readonly value="{{ ucwords(Auth::user()->email) }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Program Studi</label>
+                            <input type="text" class="form-control" readonly value="{{ ucwords(Auth::user()->profile->program_studi) }}">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Semester</label>
+                            <input type="text" class="form-control" readonly value="{{ ucwords(Auth::user()->profile->semester) }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group select-jenis">
+                            <label>Jenis <span class="text-danger">*</span></label>
+                            <select class="form-control @error('jenis') is-invalid @enderror" name="jenis">
+                                <option value="" disabled selected>--Pilih jenis--</option>
+                                @foreach ($jenisTOEFL as $item)
+                                    <option {{ old('jenis') == $item->id ? "selected" : "" }} data-price="{{ $item->harga }}" value="{{ $item->id }}">{{ ucwords($item->bahasa) }} : {{ ucwords($item->jenis) }}</option>
+                                @endforeach
                             </select>
-                            @error('semester')
+                            @error('jenis')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -50,15 +87,15 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group select-jenis">
-                            <label>Jenis TOEFL <span class="text-danger">*</span></label>
-                            <select class="form-control @error('jenis') is-invalid @enderror" name="jenis">
-                                <option value="" disabled selected>--Pilih--</option>
-                                @foreach ($jenisTOEFL as $item)
-                                    <option {{ old('jenis') == $item->id ? "selected" : "" }} data-price="{{ $item->harga }}" value="{{ $item->id }}">{{ $item->bahasa }} : {{ $item->jenis }}</option>
+                        <div class="form-group">
+                            <label>Periode <span class="text-danger">*</span></label>
+                            <select class="form-control @error('periode') is-invalid @enderror" name="periode">
+                                <option value="" disabled selected>--Pilih Periode--</option>
+                                @foreach ($periode as $item)
+                                    <option {{ old('periode') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ ucwords($item->nama_periode) }}</option>
                                 @endforeach
                             </select>
-                            @error('jenis')
+                            @error('periode')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -69,7 +106,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label>Harga </label>
-                        <input type="text" class="form-control price-input" placeholder="Rp. 0,-" readonly>
+                        <input type="text" class="form-control form-control-lg price-input" placeholder="Rp. 0,-" readonly>
                     </div>
                 </div>
                 <div class="row mt-4 px-2 float-right">

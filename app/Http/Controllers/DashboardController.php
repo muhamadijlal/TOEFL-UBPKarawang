@@ -26,19 +26,36 @@ class DashboardController extends Controller
         return datatables()
             ->of($collection)
             ->addColumn('nama', function($row){
-                return $row->user->name;
+                return $row->user->nama;
             })
             ->addColumn('nim', function($row){
-                return $row->user->nim;
+                return $row->user->profile->nim;
+            })
+            ->addColumn('periode', function($row){
+                return $row->periode->nama_periode;
+            })
+            ->addColumn('semester', function($row){
+                return ucwords($row->user->profile->semester);
             })
             ->addColumn('email', function($row){
                 return $row->user->email;
             })
             ->addColumn('bahasa', function($row){
-                return $row->product->bahasa;
+                return ucwords($row->product->bahasa);
             })
             ->addColumn('jenis', function($row){
-                return $row->product->jenis;
+                return ucwords($row->product->jenis);
+            })
+            ->addColumn('status_pembayaran', function($row){
+                if($row->status_pembayaran == 1){
+                    return '
+                        <span class="badge badge-success">Lunas</span>
+                    ';
+                }else{
+                    return '
+                        <span class="badge badge-secondary">Belum Lunas</span>
+                    ';
+                }
             })
             ->addColumn('invoice', function($row){
                 return "
@@ -47,7 +64,7 @@ class DashboardController extends Controller
                     </a>
                 ";
             })
-            ->rawColumns(['invoice'])
+            ->rawColumns(['invoice','status_pembayaran'])
             ->make(true);
     }
 }

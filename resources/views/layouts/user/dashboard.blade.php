@@ -39,6 +39,7 @@
               <th>Nama</th>
               <th>NIM</th>
               <th>Email</th>
+              <th>Periode</th>
               <th>Semester</th>
               <th>Bahasa TOEFL</th>
               <th>Jenis TOEFL</th>
@@ -78,6 +79,7 @@
         {data: 'nama', name: 'nama'},
         {data: 'nim', name: 'nim'},
         {data: 'email', name: 'email'},
+        {data: 'periode', name: 'periode'},
         {data: 'semester', name: 'semester'},
         {data: 'bahasa', name: 'bahasa'},
         {data: 'jenis', name: 'jenis'},

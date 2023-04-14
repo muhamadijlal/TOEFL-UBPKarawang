@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Pendaftaran;
+use App\Models\Periode;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -20,12 +22,15 @@ class PendaftaranController extends Controller
     }
 
     public function pendaftaran(){
-        $jenisTOEFL = Product::get();
-        if(Auth::user()->profile == null){
+        
+        if(Auth::user()->profile->no_handphone == null || Auth::user()->profile->semester == null || Auth::user()->profile->program_studi == null){
             return redirect()->route('user.dashboard');
         }
 
-        return view('layouts.user.pendaftaran.create', compact('jenisTOEFL'));
+        $jenisTOEFL = Product::get();
+        $periode = Periode::where('status',1)->get();
+
+        return view('layouts.user.pendaftaran.create', compact('jenisTOEFL','periode'));
     }
 
     public function invoice($pendaftaran_id){
@@ -36,22 +41,22 @@ class PendaftaranController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'semester' => ['required'],
             'jenis' => ['required'],
+            'periode' => ['required'],
         ]);
 
         $product = Product::where('id',$request->jenis)->first('harga');
         $subtotal = $product->harga;
-        
+
         // $this->apiBniResponse();
 
         $pendaftaran_id = Pendaftaran::create([
             'user_id' => Auth::user()->id,
-            'semester' => $request->semester,
             'product_id' => $request->jenis,
+            'periode_id' => $request->periode,
+            'virtual_account' => Str::random(10),
             'subtotal' => $subtotal,
-            'VA' => Str::random(10),
-            'status_pembayaran' => 'belum dibayar',
+            'status_pembayaran' => 0,
         ])->id;
 
         Invoice::create([
@@ -87,5 +92,5 @@ class PendaftaranController extends Controller
         //                 'type'=>'createBilling'
         //             )
         // ]);
-    }
+    }  
 }
