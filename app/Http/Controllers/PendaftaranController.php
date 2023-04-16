@@ -45,10 +45,17 @@ class PendaftaranController extends Controller
             'periode' => ['required'],
         ]);
 
+        if($this->checkIfRegistered($request)){
+            return redirect()
+                    ->route('user.dashboard')
+                    ->withErrors('Periode sebelumnya masih aktif, tidak dapat mendaftar diperiode yang sama jika periode pendaftaran sebelumnya masih aktif');
+        };
+        
+
         $product = Product::where('id',$request->jenis)->first('harga');
         $subtotal = $product->harga;
 
-        // $this->apiBniResponse();
+        $this->sendMail();
 
         $pendaftaran_id = Pendaftaran::create([
             'user_id' => Auth::user()->id,
@@ -64,9 +71,6 @@ class PendaftaranController extends Controller
             'user_id' => Auth::user()->id,
             'pendaftaran_id' => $pendaftaran_id,
         ]);
-
-        Mail::to('haidarijlal027@gmail.com')
-            ->send(new registeredMail());
 
         return redirect()->route('user.dashboard')->with('success','Pendaftaran Selesai, Lanjutkan pembayaran menggunakan Nomor Virtual');
     }
@@ -92,5 +96,34 @@ class PendaftaranController extends Controller
         //                 'type'=>'createBilling'
         //             )
         // ]);
-    }  
+    }
+
+    protected function sendMail(){
+        Mail::to('haidarijlal027@gmail.com')
+            ->send(new registeredMail());
+    }
+
+    protected function checkIfRegistered($req){
+
+        // Check history pendaftaran
+        // Jika status periode masih aktif 
+        // User tidak dapat mendaftar di gelombang/periode yang sama
+
+        $collection = Pendaftaran::with(['user','periode'])
+                    ->whereHas('user', function($query){
+                        $query->whereHas('profile', function($query){
+                            $query->where('nim', Auth::user()->profile->nim);
+                        });
+                    })->whereHas('periode', function($query) use ($req){
+                        $query->where('status',1)
+                            ->where('id', $req->periode);
+                    })
+                    ->get();
+
+        if($collection->isNotEmpty()){
+            return true;
+        }else{
+            return false;
+        };
+    }
 }

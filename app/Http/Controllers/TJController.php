@@ -13,14 +13,13 @@ class TJController extends Controller
     }
 
     public function datatablePelatihan(){
-        $product = Product::where('bahasa','jepang')
-                          ->where('jenis','pelatihan')
-                          ->first();
-
         $collection = Pendaftaran::with(['user'])
-                                 ->orderBy('id','DESC')
-                                 ->where('product_id', $product->id)
-                                 ->get();
+                              ->whereHas('product', function($query){
+                                $query->where('bahasa','jepang')
+                                      ->where('jenis','pelatihan');
+                              })
+                              ->orderBy('id','DESC')
+                              ->get();
 
         return datatables()
             ->of($collection)
@@ -59,14 +58,13 @@ class TJController extends Controller
     }
 
     public function datatableTest(){
-        $product = Product::where('bahasa','jepang')
-                          ->where('jenis','test')
-                          ->first();
-
         $collection = Pendaftaran::with(['user'])
-                                 ->orderBy('id','DESC')
-                                 ->where('product_id', $product->id)
-                                 ->get();
+                              ->whereHas('product', function($query){
+                                $query->where('bahasa','jepang')
+                                      ->where('jenis','test');
+                              })
+                              ->orderBy('id','DESC')
+                              ->get();
    
            return datatables()
                ->of($collection)
@@ -105,14 +103,13 @@ class TJController extends Controller
     }
 
     public function datatablePelatihanTest(){
-        $product = Product::where('bahasa','jepang')
-                        ->where('jenis','pelatihan dan test')
-                        ->first();
-
         $collection = Pendaftaran::with(['user'])
-                                ->orderBy('id','DESC')
-                                ->where('product_id', $product->id)
-                                ->get();
+                              ->whereHas('product', function($query){
+                                $query->where('bahasa','jepang')
+                                      ->where('jenis','pelatihan dan test');
+                              })
+                              ->orderBy('id','DESC')
+                              ->get();
    
            return datatables()
                ->of($collection)

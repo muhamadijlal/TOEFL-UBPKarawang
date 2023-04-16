@@ -16,6 +16,7 @@ class Periode extends Model
         'nama_periode',
         'start_periode',
         'end_periode',
+        'expired_periode',
         'status',
     ];
 

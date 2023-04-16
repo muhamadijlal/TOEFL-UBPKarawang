@@ -22,6 +22,8 @@
 <div class="container-fluid">
   @if(session('success'))
     @include('components.alert-success', ['message' => session('success')])
+  @elseif($errors->any())
+    @include('components.alert-danger', ['errors' => $errors->all()])
   @endif
 
   @if(Auth::user()->profile->no_handphone == null || Auth::user()->profile->semester == null || Auth::user()->profile->program_studi == null)

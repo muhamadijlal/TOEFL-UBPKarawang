@@ -59,10 +59,18 @@ class PeriodeController extends Controller
         $dateFrom = date('Y-m-d', strtotime($dates[0]));
         $dateTo = date('Y-m-d', strtotime($dates[1]));
 
+        // Expire date is + 1 day dateTo
+        $expireDate = date('Y-m-d', strtotime('+ 1 day', strtotime($dateTo)));
+
+        if($this->checkDate($dateFrom, $dateTo)){
+            return response()->json(['status_code' => 400, 'status_message' => 'error', 'message' => 'Tanggal periode sudah digunakan']);
+        }
+
         Periode::create([
             'nama_periode' => $request->nama_periode,
             'start_periode' => $dateFrom,
             'end_periode' => $dateTo,
+            'expired_periode' => $expireDate,
             'status' => 1,
         ]);
 
@@ -74,5 +82,15 @@ class PeriodeController extends Controller
         Periode::findOrFail($id)->delete();
      
         return response()->json(['status_code' => 200, 'status_message' => 'success', 'message' => 'Periode berhasil dihapus']);
+    }
+
+    protected function checkDate($dateFrom, $dateTo){
+        $range = Periode::where('start_periode', $dateFrom)
+                        ->orWhere('end_periode', $dateTo)
+                        ->get();
+
+        if($range->isNotEmpty()){
+            return true;
+        }
     }
 }

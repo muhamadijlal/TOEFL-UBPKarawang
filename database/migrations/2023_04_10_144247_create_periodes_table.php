@@ -18,6 +18,7 @@ class CreatePeriodesTable extends Migration
             $table->string('nama_periode', 100);
             $table->date('start_periode');
             $table->date('end_periode');
+            $table->date('expired_periode');
             $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();

@@ -157,6 +157,11 @@
             title: response.message
           })
           table.draw();
+        }else{
+          Toast.fire({
+            icon: response.status_message,
+            title: response.message
+          })
         }
       },
       error: function(response) {
