@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('jenis', 25);
             $table->float('harga');
             $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 

@@ -42,6 +42,8 @@ Route::group(['middleware'=>['auth','revalidate']], function(){
         Route::get('product', [ProductController::class, 'index'])->name('product');
         Route::post('product/datatable', [ProductController::class, 'datatable'])->name('product.datatable');
         Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
+        Route::get('product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+        Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
         // English
