@@ -38,6 +38,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{ route('admin.product') }}" class="nav-link">
+              <i class="nav-icon fa fa-archive"></i>
+              <p>
+                Master product
+              </p>
+            </a>
+          </li>
+
           {{-- English start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">

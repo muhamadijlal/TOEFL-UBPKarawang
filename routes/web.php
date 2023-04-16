@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PeriodeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TEController;
@@ -36,6 +37,12 @@ Route::group(['middleware'=>['auth','revalidate']], function(){
         Route::post('periode/datatable', [PeriodeController::class, 'datatable'])->name('periode.datatable');
         Route::post('periode/store', [PeriodeController::class, 'store'])->name('periode.store');
         Route::delete('periode/destroy/{id}', [PeriodeController::class, 'destroy'])->name('periode.destroy');
+
+        // Master product
+        Route::get('product', [ProductController::class, 'index'])->name('product');
+        Route::post('product/datatable', [ProductController::class, 'datatable'])->name('product.datatable');
+        Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
+        Route::delete('product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
         // English
         Route::get('toefl/english/pelatihan', [TEController::class, 'pelatihan'])->name('english.pelatihan');
