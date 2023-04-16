@@ -21,4 +21,10 @@ class Product extends Model
     {
         return $this->hasManny(Pendaftaran::class,'id');
     }
+
+    // product hasOne periode
+    public function periode()
+    {
+        return $this->hasOne(Periode::class, 'id');
+    }
 }

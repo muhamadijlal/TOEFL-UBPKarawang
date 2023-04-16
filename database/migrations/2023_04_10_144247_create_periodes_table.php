@@ -15,6 +15,7 @@ class CreatePeriodesTable extends Migration
     {
         Schema::create('periode', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id');
             $table->string('nama_periode', 100);
             $table->date('start_periode');
             $table->date('end_periode');
@@ -22,6 +23,10 @@ class CreatePeriodesTable extends Migration
             $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('periode', function (Blueprint $table){
+            $table->foreign('product_id')->on('product')->references('id')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
