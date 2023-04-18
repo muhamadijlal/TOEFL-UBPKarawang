@@ -27,14 +27,14 @@
           <div class="row">
             <div class="col-6">
               <div class="form-group">
-                <label for="bahasa">Bahasa</label>
+                <label for="bahasa">Bahasa <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="bahasa" name="bahasa"
                   placeholder="Inggris, Jepang, mandarin, dst." value="{{ $item->bahasa }}">
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
-                <label for="jenis">Jenis</label>
+                <label for="jenis">Jenis <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="jenis" name="jenis"
                   placeholder="Pelatihan, Test, Pelatihan dan Test." value="{{ $item->jenis }}">
               </div>
@@ -43,7 +43,7 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <label for="harga">harga</label>
+                <label for="harga">harga <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="currencyIDR" name="harga" placeholder="Rp. 100.000,-" value="@currency($item->harga)">
               </div>
             </div>

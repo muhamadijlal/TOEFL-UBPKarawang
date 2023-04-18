@@ -27,13 +27,13 @@
           <div class="row">
             <div class="col-6">
               <div class="form-group">
-                <label for="nama_periode">Nama periode</label>
+                <label for="nama_periode">Nama periode <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="nama_periode" name="nama_periode" placeholder="Berikan nama periode, contoh: Gelombang 1, dst.">
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
-                <label>Date range:</label>
+                <label>Date range <span class="text-danger">*</span></label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -42,7 +42,30 @@
                   </div>
                   <input type="text" class="form-control float-right" id="getRangeDate" name="rangeDate">
                 </div>
-
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label>Bahasa <span class="text-danger">*</span></label>
+                <select class="form-control" name="bahasa">
+                  <option disabled selected value="">-- Pilih bahasa --</option>
+                  @foreach (array_unique($bahasa) as $item)
+                    <option value="{{ $item }}">{{ $item }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label>Jenis <span class="text-danger">*</span></label>
+                <select class="form-control" name="jenis">
+                  <option disabled selected value="">-- Pilih jenis --</option>
+                  @foreach (array_unique($jenis) as $item)
+                    <option value="{{ $item }}">{{ $item }}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
           </div>
@@ -61,6 +84,8 @@
           <thead>
             <tr>
               <th>No.</th>
+              <th>Bahasa</th>
+              <th>Jenis</th>
               <th>Nama periode</th>
               <th>Tanggal mulai</th>
               <th>Tanggal berakhir</th>
@@ -110,6 +135,8 @@
             },
             columns: [
               {data: "DT_RowIndex"},
+              {data: 'bahasa', name: 'bahasa'},
+              {data: 'jenis', name: 'jenis'},
               {data: 'nama_periode', name: 'nama_periode'},
               {data: 'start_periode', name: 'start_periode'},
               {data: 'end_periode', name: 'end_periode'},
@@ -172,6 +199,7 @@
       },
       complete: function(response) {
         $("#nama_periode").val("");
+        $('select').val('');
       }
     });
   })

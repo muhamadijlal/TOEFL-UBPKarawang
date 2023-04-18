@@ -21,6 +21,11 @@ class UserController extends Controller
             'program_studi' => ['required'],
         ]);
 
+        // check whether the initial character of $request->phone number contains "08" character or not
+        if(substr($request->no_handphone,0,2) != "08"){
+            return back()->withErrors('Format nomor handphone tidak sesuai, cek kembali!');
+        }
+
         ProfileUser::where('user_id', $id)->update([
             'no_handphone' => $request->no_handphone,
             'semester' => $request->semester,

@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PendaftaranController extends Controller
 {
-    public function __construct()
-    {
-        $client_id = 2108;
-    }
 
     public function pendaftaran(){
         
@@ -27,10 +23,10 @@ class PendaftaranController extends Controller
             return redirect()->route('user.dashboard');
         }
 
-        $jenisTOEFL = Product::get();
-        $periode = Periode::where('status',1)->get();
+        $periode = Periode::with(['product'])->where('status',1)->get();
+        $labels = Periode::where('status',1)->distinct()->get('nama_periode');
 
-        return view('layouts.user.pendaftaran.create', compact('jenisTOEFL','periode'));
+        return view('layouts.user.pendaftaran.create', compact('periode','labels'));
     }
 
     public function invoice($pendaftaran_id){
@@ -41,8 +37,7 @@ class PendaftaranController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'jenis' => ['required'],
-            'periode' => ['required'],
+            'pelatihan' => ['required'],
         ]);
 
         if($this->checkIfRegistered($request)){
@@ -50,17 +45,19 @@ class PendaftaranController extends Controller
                     ->route('user.dashboard')
                     ->withErrors('Periode sebelumnya masih aktif, tidak dapat mendaftar diperiode yang sama jika periode pendaftaran sebelumnya masih aktif');
         };
-        
 
-        $product = Product::where('id',$request->jenis)->first('harga');
+        $product = Product::where('id',$request->pelatihan)->first('harga');
         $subtotal = $product->harga;
 
-        $this->sendMail();
+        $periode = Periode::findOrFail($request->pelatihan);
+        $product_id = $periode->product_id;
+
+        // $this->sendMail();
 
         $pendaftaran_id = Pendaftaran::create([
             'user_id' => Auth::user()->id,
-            'product_id' => $request->jenis,
-            'periode_id' => $request->periode,
+            'product_id' => $product_id,
+            'periode_id' => $request->pelatihan,
             'virtual_account' => Str::random(10),
             'subtotal' => $subtotal,
             'status_pembayaran' => 0,
@@ -105,9 +102,11 @@ class PendaftaranController extends Controller
 
     protected function checkIfRegistered($req){
 
-        // Check history pendaftaran
-        // Jika status periode masih aktif 
-        // User tidak dapat mendaftar di gelombang/periode yang sama
+        /*
+        * Check history pendaftaran
+        * Jika status periode masih aktif 
+        * User tidak dapat mendaftar di gelombang/periode yang sama
+        */
 
         $collection = Pendaftaran::with(['user','periode'])
                     ->whereHas('user', function($query){
@@ -116,14 +115,12 @@ class PendaftaranController extends Controller
                         });
                     })->whereHas('periode', function($query) use ($req){
                         $query->where('status',1)
-                            ->where('id', $req->periode);
+                            ->where('id', $req->pelatihan);
                     })
                     ->get();
 
         if($collection->isNotEmpty()){
             return true;
-        }else{
-            return false;
-        };
+        }
     }
 }

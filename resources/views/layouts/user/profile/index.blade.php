@@ -17,6 +17,9 @@
 
 
 @section('content')
+  @if($errors->any())
+    @include('components.alert-danger', ['errors' => $errors->all()])
+  @endif
   <div class="container-fluid">
     <div class="row">
       <!-- Update profile -->
@@ -124,7 +127,3 @@
     </div>
   </div>
 @endsection
-
-@push('js')
-
-@endpush
